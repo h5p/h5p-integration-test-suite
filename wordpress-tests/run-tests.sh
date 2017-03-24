@@ -23,6 +23,7 @@ docker-compose exec php bash -c "cd /var/www/html && /wpcli/bin/wp plugin activa
 cd test
 npm install
 npm test
+wordpresstests=$?
 cd ..
 
 # Clean up all containers

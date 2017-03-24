@@ -1,10 +1,3 @@
-# What it do
-
-1. Spins up a fresh Moodle environment
-2. Installs Moodle
-3. Creates a course
-4. Runs the H5P integration test suite
-
 # Commands
 
 Install:

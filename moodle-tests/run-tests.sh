@@ -23,6 +23,7 @@ docker-compose exec php bash -c "cd /var/www/html && php admin/tool/uploadcourse
 cd test
 npm install
 npm test
+moodletests=$?
 cd ..
 
 # Clean up all containers

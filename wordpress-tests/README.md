@@ -1,16 +1,3 @@
-# Test runner
-
-For some reason wordpress and nightwatch did not want to work together. Testcafe is a very nice replacement though, might consider replacing all tests with testcafe if possible.
-
-# Components
-
-Get wordpress from `wordpress.org/download`
-
-Create wp-cli:
-```bash
-composer create-project wp-cli/wp-cli wpcli
-```
-
 # Commands
 
 Connect database:
