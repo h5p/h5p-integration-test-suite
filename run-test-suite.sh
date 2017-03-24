@@ -34,7 +34,6 @@ successfulltests="${#TESTS[@]}"
 for i in "${!TESTS[@]}"
 do
   :
-  ECHO "What is i ?? $i and value ${TESTS[$i]}"
   if [ "${TESTS[$i]}" == 1 ]
     then successfulltests=$(($successfulltests-1)); ECHO "Test $i failed"
   fi
