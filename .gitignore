@@ -1,0 +1,4 @@
+wordpress-tests/test/node_modules
+moodle-tests/test/node_modules
+drupal-tests/test/node_modules
+image-builds

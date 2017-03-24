@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+  mariadb:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: secret-pw
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      command: --default-character-set=utf8mb4 --innodb_file_format=Barracuda --innodb_file_per_table=1 --innodb_large_prefix --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --collation_server=utf8mb4_unicode_ci --default-character-set=utf8mb4
+    volumes:
+      - mysql:/var/lib/mysql
+      - ../common-containers/mysql/config:/etc/mysql/conf.d
+    ports:
+      - "3000:3306"
+
+  php:
+    image: thomasmars/wordpress-h5p-integration-php
+    volumes:
+      - wordpress:/var/www/html
+      - wpcli:/wpcli
+      - ./h5p:/var/www/html/wp-content/plugins/h5p
+
+  nginx:
+    build: ./nginx
+    volumes_from:
+      - php
+    ports:
+      - "80:80"
+
+  selenium:
+    image: selenium/standalone-chrome
+    ports:
+      - "4444:4444"
+
+volumes:
+  mysql:
+  wordpress:
+  wpcli:

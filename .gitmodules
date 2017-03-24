@@ -1,0 +1,12 @@
+[submodule "drupal-tests/h5p"]
+	path = drupal-tests/h5p
+	url = git://git.drupal.org/project/h5p.git
+[submodule "wordpress-tests/h5p"]
+	path = wordpress-tests/h5p
+	url = https://github.com/h5p/h5p-wordpress-plugin.git
+[submodule "moodle-tests/h5p"]
+	path = moodle-tests/h5p
+	url = https://github.com/h5p/h5p-moodle-plugin.git
+[submodule "hub-api-tests"]
+	path = hub-api-tests
+	url = https://github.com/h5p/h5p-tests-hub-endpoints.git

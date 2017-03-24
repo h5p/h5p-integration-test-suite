@@ -1,0 +1,14 @@
+{
+  "name": "h5p-moodle-integration-test",
+  "version": "1.0.0",
+  "description": "H5P Moodle integration test",
+  "main": "index.js",
+  "scripts": {
+    "test": "testcafe chrome test"
+  },
+  "author": "Joubel",
+  "license": "MIT",
+  "devDependencies": {
+    "testcafe": "^0.13.0"
+  }
+}
