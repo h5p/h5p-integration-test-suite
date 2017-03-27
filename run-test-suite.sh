@@ -39,7 +39,7 @@ do
   fi
 done
 
-ECHO "Successfull tests: $successfulltests/${#TESTS[@]}"
+echo "Successfull tests: $successfulltests/${#TESTS[@]}"
 
 # Done!
 printf "\n\
