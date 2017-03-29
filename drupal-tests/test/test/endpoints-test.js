@@ -1,3 +1,5 @@
+import { Selector } from 'testcafe';
+
 const basePath = 'http://localhost';
 const user = 'admin';
 const pass = 'admin';
@@ -8,26 +10,34 @@ fixture('Drupal integration test')
 test('just checks if the page exists', async t => {
 
   // Enter login data
-  await t.typeText('#edit-name', 'admin')
-    .typeText('#edit-pass', 'admin')
+  await t.typeText('#edit-name', user)
+    .typeText('#edit-pass', pass)
     .click('#edit-submit');
 
-  // Open hub
+  // Add h5p content page
   await t.navigateTo('http://localhost/node/add/h5p-content')
-    .switchToIframe('.h5p-editor-iframe')
-    .expect('.icon-hub-icon').ok('Hub is showing up')
-    .click('.icon-hub-icon');
+    .switchToIframe('.h5p-editor-iframe');
 
-  // // Install library
-  // await t.expect('.content-type-list li:first-child').ok('Content type list has at least one library')
-  //   .click('.content-type-list li:first-child')
-  //   .expect('.content-type-list .button.button-install').ok('Detailed view has an install button')
-  //   .click('.content-type-list .button.button-install');
-  //
-  // // wait for content type to install
-  // await t.wait(15000);
-  //
-  // // Check that install button is replaced by use button
-  // await t.expect('.content-type-list .button.button-install').notOk('Detailed view should not have install button')
-  //   .expect('.content-type-list .button.button-use').ok('Detailed viw should have a use button');
+  // Open hub client
+  const hubPanel = await Selector('.icon-hub-icon');
+  await t.expect(hubPanel).ok('Hub is showing up')
+    .click(hubPanel);
+
+  // Enter detailed view of first content type
+  const firstContentType = await Selector('.content-type-list li:first-child');
+  await t.expect(firstContentType).ok('Content type list has at least one library')
+    .click(firstContentType);
+
+  // Install content type
+  const installButton = await Selector('.content-type-detail .button.button-install');
+  await t.expect(installButton.hasClass('hidden')).notOk('Detailed view has an install button')
+    .click(installButton);
+
+  // wait for content type to install
+  await t.wait(8000);
+
+  // Check that install button is replaced by use button
+  const useButton = await Selector('.content-type-detail .button.button-use');
+  await t.expect(installButton.hasClass('hidden')).ok('Detailed view should hide install button')
+    .expect(useButton.hasClass('hidden')).notOk('Detailed viw should show use button');
 });
