@@ -1,0 +1,7 @@
+version: "2"
+
+services:
+  oldphp:
+    image: helder/php-5.3
+    volumes:
+      - ./h5p:/var/www/html/modules/h5p

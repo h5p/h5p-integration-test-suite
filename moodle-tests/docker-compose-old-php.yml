@@ -1,0 +1,7 @@
+version: "2"
+
+services:
+  oldphp:
+    image: alterway/php:5.4-fpm
+    volumes:
+      - ./h5p:/var/www/html/mod/hvp

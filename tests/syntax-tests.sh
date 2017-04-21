@@ -2,31 +2,6 @@
 
 TESTS=()
 
-# Run hub endpoint tests
-cd hub-api-tests
-npm install
-npm test
-TESTS+=("$?")
-cd ..
-
-# Run Drupal tests
-cd drupal-tests
-source ./run-tests.sh
-TESTS+=("$drupaltests")
-cd ..
-
-# Run Wordpress tests
-cd wordpress-tests
-source ./run-tests.sh
-TESTS+=("$wordpresstests")
-cd ..
-
-# Run Moodle tests
-cd moodle-tests
-source ./run-tests.sh
-TESTS+=("$moodletests")
-cd ..
-
 cd drupal-tests
 source ./php-syntax-check.sh
 TESTS+=("$drupalphpcompatibilitytests")
