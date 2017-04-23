@@ -20,11 +20,13 @@ docker-compose exec php bash -c "cd /var/www && chmod -R 777 html"
 docker-compose exec php bash -c "cd /var/www/html && php admin/tool/uploadcourse/cli/uploadcourse.php --mode=createnew --file=/moodleupload/newcourse.csv"
 
 # Run the tests
-cd test
+cd test || exit
 npm install
 npm test
-moodletests=$?
-cd ..
+success=$?
+cd .. || exit
 
 # Clean up all containers
 docker-compose down -v
+
+exit "$success"

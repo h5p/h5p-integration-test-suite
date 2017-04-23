@@ -3,6 +3,7 @@ import { Selector } from 'testcafe';
 const basePath = 'http://localhost';
 const user = 'admin';
 const pass = 'admin';
+const waitForInstall = 30000;
 
 fixture('Wordpress page')
   .page(`${basePath}/wp-login.php`);
@@ -10,8 +11,8 @@ fixture('Wordpress page')
 test('just checks if the page exists', async t => {
 
   // Enter login data
-  await t.typeText('#user_login', 'admin')
-    .typeText('#user_pass', 'admin')
+  await t.typeText('#user_login', user)
+    .typeText('#user_pass', pass)
     .click('#wp-submit')
     .expect('#wpadminbar').ok('We are logged in');
 
@@ -35,7 +36,7 @@ test('just checks if the page exists', async t => {
     .click(installButton);
 
   // wait for content type to install
-  await t.wait(8000);
+  await t.wait(waitForInstall);
 
   // Check that install button is replaced by use button
   const useButton = await Selector('.content-type-detail .button.button-use');

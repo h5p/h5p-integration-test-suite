@@ -18,11 +18,13 @@ docker-compose exec php bash -c "/drush/drush site-install standard --db-url='my
   && chmod -R 777 /var/www/html"
 
 # Run integration test
-cd test
+cd test || exit
 npm install
 npm run test
-drupaltests=$?
-cd ..
+success=$?
+cd .. || exit
 
 # Clean up all containers
 docker-compose down -v
+
+exit "$success"

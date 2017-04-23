@@ -20,11 +20,13 @@ docker-compose exec php bash -c "cd /var/www/html && /wpcli/bin/wp core install 
 docker-compose exec php bash -c "cd /var/www/html && /wpcli/bin/wp plugin activate h5p --allow-root"
 
 # Run the tests
-cd test
+cd test || exit
 npm install
 npm test
-wordpresstests=$?
-cd ..
+success=$?
+cd .. || exit
 
 # Clean up all containers
 docker-compose down -v
+
+exit "$success"

@@ -3,6 +3,7 @@ import { Selector } from 'testcafe';
 const basePath = 'http://localhost';
 const user = 'admin';
 const pass = 'Admin';
+const waitForInstall = 30000;
 
 fixture('Integration Test')
   .page(`${basePath}/login/index.php`);
@@ -34,7 +35,7 @@ test('Test endpoints through UI', async t => {
     .click(installButton);
 
   // wait for content type to install
-  await t.wait(8000);
+  await t.wait(waitForInstall);
 
   // Check that install button is replaced by use button
   const useButton = await Selector('.content-type-detail .button.button-use');

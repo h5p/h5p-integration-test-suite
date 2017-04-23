@@ -1,46 +1,68 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091
 
 TESTS=()
+ERRORS=()
 
 # Run hub endpoint tests
-cd hub-api-tests
+cd hub-api-tests || exit
 npm install
 npm test
-TESTS+=("$?")
-cd ..
+hubapitests=$?
+TESTS+=("$hubapitests")
+ERRORS+=("Hub api tests")
+cd .. || exit
 
 # Run Drupal tests
-cd drupal-tests
+(
+cd drupal-tests || exit
 source ./run-tests.sh
+)
+drupaltests=$?
 TESTS+=("$drupaltests")
-cd ..
+ERRORS+=("Drupal integration tests")
 
 # Run Wordpress tests
-cd wordpress-tests
+(
+cd wordpress-tests || exit
 source ./run-tests.sh
+)
+wordpresstests=$?
 TESTS+=("$wordpresstests")
-cd ..
+ERRORS+=("Wordpress integration tests")
 
 # Run Moodle tests
-cd moodle-tests
+(
+cd moodle-tests || exit
 source ./run-tests.sh
+)
+moodletests=$?
 TESTS+=("$moodletests")
-cd ..
+ERRORS+=("Moodle intgration tests")
 
-cd drupal-tests
+(
+cd drupal-tests || exit
 source ./php-syntax-check.sh
-TESTS+=("$drupalphpcompatibilitytests")
-cd ..
+)
+drupalphplint=$?
+TESTS+=("$drupalphplint")
+ERRORS+=("Drupal php compatibility linter")
 
-cd wordpress-tests
+(
+cd wordpress-tests || exit
 source ./php-syntax-check.sh
-TESTS+=("$wpphpcompatibilitytests")
-cd ..
+)
+wpphplint=$?
+TESTS+=("$wpphplint")
+ERRORS+=("Wordpress php compatibility linter")
 
-cd moodle-tests
+(
+cd moodle-tests || exit
 source ./php-syntax-check.sh
-TESTS+=("$moodlephpcompatibilitytests")
-cd ..
+)
+moodlephplint=$?
+TESTS+=("$moodlephplint")
+ERRORS+=("Moodle php compatibility linter")
 
 # Print out number of tests which tests failed
 successfulltests="${#TESTS[@]}"
@@ -48,7 +70,7 @@ for i in "${!TESTS[@]}"
 do
   :
   if [ "${TESTS[$i]}" != 0 ]
-    then successfulltests=$(($successfulltests-1)); ECHO "Test $i failed"
+    then successfulltests=$((successfulltests-1)); ECHO "${ERRORS[$i]} has failed."
   fi
 done
 

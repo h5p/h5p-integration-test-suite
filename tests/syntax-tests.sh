@@ -1,21 +1,32 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091
 
 TESTS=()
+ERRORS=()
 
-cd drupal-tests
+(
+cd drupal-tests || exit
 source ./php-syntax-check.sh
-TESTS+=("$drupalphpcompatibilitytests")
-cd ..
+)
+drupalphplint=$?
+TESTS+=("$drupalphplint")
+ERRORS+=("Drupal php compatibility linter")
 
-cd wordpress-tests
+(
+cd wordpress-tests || exit
 source ./php-syntax-check.sh
-TESTS+=("$wpphpcompatibilitytests")
-cd ..
+)
+wpphplint=$?
+TESTS+=("$wpphplint")
+ERRORS+=("Wordpress php compatibility linter")
 
-cd moodle-tests
+(
+cd moodle-tests || exit
 source ./php-syntax-check.sh
-TESTS+=("$moodlephpcompatibilitytests")
-cd ..
+)
+moodlephplint=$?
+TESTS+=("$moodlephplint")
+ERRORS+=("Moodle php compatibility linter")
 
 # Print out number of tests which tests failed
 successfulltests="${#TESTS[@]}"
@@ -23,7 +34,7 @@ for i in "${!TESTS[@]}"
 do
   :
   if [ "${TESTS[$i]}" != 0 ]
-    then successfulltests=$(($successfulltests-1)); ECHO "Test $i failed"
+    then successfulltests=$((successfulltests-1)); ECHO "${ERRORS[$i]} has failed."
   fi
 done
 

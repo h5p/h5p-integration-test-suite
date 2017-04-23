@@ -3,6 +3,7 @@ import { Selector } from 'testcafe';
 const basePath = 'http://localhost';
 const user = 'admin';
 const pass = 'admin';
+const waitForInstall = 30000;
 
 fixture('Drupal integration test')
   .page(basePath);
@@ -34,7 +35,7 @@ test('just checks if the page exists', async t => {
     .click(installButton);
 
   // wait for content type to install
-  await t.wait(8000);
+  await t.wait(waitForInstall);
 
   // Check that install button is replaced by use button
   const useButton = await Selector('.content-type-detail .button.button-use');
