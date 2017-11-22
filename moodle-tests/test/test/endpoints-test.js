@@ -39,6 +39,5 @@ test('Test endpoints through UI', async t => {
 
   // Check that install button is replaced by use button
   const useButton = await Selector('.content-type-detail .button.button-use');
-  await t.expect(installButton.hasClass('hidden')).ok('Detailed view should hide install button')
-    .expect(useButton.hasClass('hidden')).notOk('Detailed viw should show use button');
+  await t.expect(useButton.hasClass('hidden')).notOk('Detailed viw should show use button');
 });
