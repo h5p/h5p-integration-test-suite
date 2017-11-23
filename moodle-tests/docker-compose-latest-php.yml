@@ -1,0 +1,7 @@
+version: "2"
+
+services:
+  latestphp:
+    image: php:fpm
+    volumes:
+      - ./h5p:/var/www/html/mod/hvp
