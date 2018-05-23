@@ -16,7 +16,7 @@ services:
       - "3000:3306"
 
   php:
-    image: thomasmars/moodle-h5p-integration-php
+    image: thomasmars/moodle-h5p-integration-php:3.5
     volumes:
       - moodle:/var/www/html
       - moodledata:/moodledata
