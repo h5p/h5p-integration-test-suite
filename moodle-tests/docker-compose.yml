@@ -1,25 +1,36 @@
 version: "2"
 
 services:
-  mariadb:
-    image: mariadb
+  postgres:
+    image: postgres:9.6.3
     environment:
-      MYSQL_ROOT_PASSWORD: secret-pw
-      MYSQL_DATABASE: moodle
-      MYSQL_USER: moodle
-      MYSQL_PASSWORD: moodle
-      command: --default-character-set=utf8mb4 --innodb_file_format=Barracuda --innodb_file_per_table=1 --innodb_large_prefix --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --collation_server=utf8mb4_unicode_ci --default-character-set=utf8mb4
+      POSTGRES_USER: moodle
+      POSTGRES_PASSWORD: moodle
+      POSTGRES_DB: moodle
     volumes:
-      - mysql:/var/lib/mysql
-      - ../common-containers/mysql/config:/etc/mysql/conf.d
+    - postgres:/var/lib/postgresql
     ports:
-      - "3000:3306"
+    - "5432:5432"
+
+#  mariadb:
+#    image: mariadb
+#    environment:
+#      MYSQL_ROOT_PASSWORD: secret-pw
+#      MYSQL_DATABASE: moodle
+#      MYSQL_USER: moodle
+#      MYSQL_PASSWORD: moodle
+#      command: --default-character-set=utf8mb4 --innodb_file_per_table=1 --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --collation_server=utf8mb4_unicode_ci --default-character-set=utf8mb4
+#    volumes:
+#      - mysql:/var/lib/mysql
+#      - ../common-containers/mysql/config:/etc/mysql/conf.d
+#    ports:
+#      - "3000:3306"
 
   php:
     image: thomasmars/moodle-h5p-integration-php:3.5
     volumes:
       - moodle:/var/www/html
-      - moodledata:/moodledata
+      - moodledata:/var/www/moodledata
       - ./h5p:/var/www/html/mod/hvp
       - ./moodleupload:/moodleupload
 
@@ -31,6 +42,7 @@ services:
       - "80:80"
 
 volumes:
-  mysql:
+#  mysql:
   moodle:
   moodledata:
+  postgres:

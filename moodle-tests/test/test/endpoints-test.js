@@ -21,18 +21,21 @@ test('Test endpoints through UI', async t => {
 
   // Open hub client
   const hubPanel = await Selector('.icon-hub-icon');
-  await t.expect(hubPanel).ok('Hub is showing up')
-    .click(hubPanel);
+  await t.expect(hubPanel).ok('Hub is showing up');
 
   // Enter detailed view of first content type
   const firstContentType = await Selector('.content-type-list li:first-child');
-  await t.expect(firstContentType).ok('Content type list has at least one library')
-    .click(firstContentType);
+  await t.expect(firstContentType).ok('Content type list has at least one library');
 
   // Install content type
+  const getButton = await Selector('.content-type-list .button.button-install');
+  await t.expect(getButton).ok('Content list has a "get" button')
+    .click(getButton);
+
   const installButton = await Selector('.content-type-detail .button.button-install');
-  await t.expect(installButton.hasClass('hidden')).notOk('Detailed view has an install button')
+  await t.expect(installButton).ok('Detailed view has an install button')
     .click(installButton);
+
 
   // wait for content type to install
   await t.wait(waitForInstall);
