@@ -1,7 +1,3 @@
-[submodule "drupal-tests/h5p"]
-	path = drupal-tests/h5p
-	url = git://git.drupal.org/project/h5p.git
-	branch = 7.x-1.x-release
 [submodule "wordpress-tests/h5p"]
 	path = wordpress-tests/h5p
 	url = https://github.com/h5p/h5p-wordpress-plugin.git

@@ -4,21 +4,21 @@
 TESTS=()
 ERRORS=()
 
-(
-cd drupal-tests || exit
-source ./php-syntax-check.sh
-)
-drupalphplint=$?
-TESTS+=("$drupalphplint")
-ERRORS+=("Drupal php compatibility linter")
+#(
+#cd drupal-tests || exit
+#source ./php-syntax-check.sh
+#)
+#drupalphplint=$?
+#TESTS+=("$drupalphplint")
+#ERRORS+=("Drupal php compatibility linter")
 
-(
-cd wordpress-tests || exit
-source ./php-syntax-check.sh
-)
-wpphplint=$?
-TESTS+=("$wpphplint")
-ERRORS+=("Wordpress php compatibility linter")
+#(
+#cd wordpress-tests || exit
+#source ./php-syntax-check.sh
+#)
+#wpphplint=$?
+#TESTS+=("$wpphplint")
+#ERRORS+=("Wordpress php compatibility linter")
 
 (
 cd moodle-tests || exit
