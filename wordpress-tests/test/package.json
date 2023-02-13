@@ -9,6 +9,6 @@
   "author": "Joubel",
   "license": "MIT",
   "devDependencies": {
-    "testcafe": "^2.1.0"
+    "testcafe": "^2.3.1"
   }
 }
