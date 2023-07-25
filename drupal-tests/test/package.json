@@ -9,6 +9,10 @@
   "author": "Joubel",
   "license": "MIT",
   "devDependencies": {
-    "testcafe": "^2.3.1"
+    "testcafe": "^3.0.1"
+  },
+  "overrides": {
+    "semver": "^5.7.2",
+    "tough-cookie": "^4.1.3"
   }
 }
